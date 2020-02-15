@@ -4,17 +4,41 @@ const isDev = require('electron-is-dev')
 let win
 
 createWindow = () => {
-  win = new BrowserWindow({width: 900, height: 680});
+  win = new BrowserWindow({width: 900, minWidth: 1000 , height: 680, minHeight: 600});
   win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`)
   if (isDev) {
     // Open the DevTools.
     //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-    win.webContents.openDevTools()
   }
   win.on('closed', () => win = null)
 }
+const template = [{
+  label: "React",
+  submenu: [
+    { role: 'about' },
+    { type: 'separator' },
+    { role: 'services' },
+    { type: 'separator' },
+    { role: 'hide' },
+    { role: 'hideothers' },
+    { role: 'unhide' },
+    { type: 'separator' },
+    { role: 'quit' }
+  ]
+},
+// { role: 'fileMenu' }
+{
+  label: 'Developer',
+  submenu: [{ 
+      label: "Toggle Developer Tools",
+      accelerator: process.platform === "darwin" ? 'Cmd+Alt+I' : 'Ctrl+Shift+I',
+      click() {
+        win.webContents.toggleDevTools()
+      }
+    }]
+}
+]
 
-const template = []
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
 

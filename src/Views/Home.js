@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 // Components
-import TopMenu from '../Componets/TopMenu'
+import Menu from '../Componets/Menu'
+import Aside from '../Componets/Aside'
+import Charts from '../Componets/Charts'
 
 class Home extends Component {
     constructor(props) {
@@ -14,9 +16,13 @@ class Home extends Component {
     render() { 
         return ( 
             <div className="Home">
-                <TopMenu/>
+                <Menu/>
+                <div className="Main">
+                    <Aside/>
+                    <Charts/>
+                </div>
             </div>
-         )
+        )
     }
 }
  

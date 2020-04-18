@@ -30,7 +30,8 @@ const Aside = {
 }
 
 module.exports = {
-    Menu, 
-    Aside
-
+    Icons: {
+        Menu, 
+        Aside
+    }
 }

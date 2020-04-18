@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Doughnut, Line } from 'react-chartjs-2'
+import {Line } from 'react-chartjs-2'
+import '../css/Charts.scss'
 
 export default class Charts extends Component {
     constructor(props) {
@@ -51,8 +52,7 @@ export default class Charts extends Component {
     render() { 
         return ( 
             <div className="Charts">
-                <Line data={this.state.data} width="600" height="400" options={this.state.options}
-                />
+                <Line data={this.state.data} width="600" height="400" options={this.state.options}/>
             </div>
         )
     }

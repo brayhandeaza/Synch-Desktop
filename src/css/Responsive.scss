@@ -1,0 +1,88 @@
+@media only screen and (max-width: 1000px)  {
+    
+    .Header {
+        height: 50px;
+    }
+    .Header .left .logo img {
+        width: 30px;
+    }
+    
+    .Home .left {
+        width: 80px;
+    }
+    .left .titles-container span { 
+        font-size: 18px;
+    }
+
+    .right img {
+        width: 12px;
+       
+    }
+
+    .main .left .top img, .main .left .bottom img{
+        width: 20px;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .Header {
+        .left {
+            width: auto;
+            .titles-container {
+                padding: 0;
+                background: rgba(0, 0, 0, 0.322);
+                span {
+                    display: none;
+                }
+            }
+        }
+        .right {
+            width: 100%;
+        }
+    }
+
+    .Aside {
+        width: 100%;
+        height: 85px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        
+        .top {
+            height: 100%;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            
+            .icons {
+                width: 50px;
+                margin: 0 5px 0 5px;
+            }
+            :hover {
+                background: transparent;
+            }
+        }
+        .bottom {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            position: relative;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+
+            .icons {
+                width: 50px;
+            }
+            :hover {
+                background: transparent;
+            }
+        }
+    }
+
+}

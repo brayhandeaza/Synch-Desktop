@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-const { Menu} = require('../dry/Image')
+import '../css/Menu.scss'
+const { Icons } = require('../dry/Image')
 
 
-class TopMenu extends Component {
+class Menu extends Component {
     constructor(props) {
         super(props)
         this.state = { 
@@ -11,22 +12,26 @@ class TopMenu extends Component {
     }
     render() { 
         return ( 
-            <div className="Menu" color="white" light expand="md">
-                <div className="left-container">
-                    <div className="Logo">
-                        <img className="logo" src={Menu.Logo} alt="Logo"/>
+            <div className="Header">
+                 <div className="left">
+                    <div className="logo">
+                        <img src={Icons.Menu.Logo} alt="logo"/>
                     </div>
-                    <div className="Title">
-                        <span className="nav-text">Stocks</span>
-                        <img src={Menu.Dash} alt=""/>
-                        <span className="nav-text">Netflix</span>
+                    <div className="titles-container">
+                        <span>Stocks</span>
+                        <span>-</span>
+                        <span>Twitter</span>
                     </div>
                 </div>
-                <div className="right-container">
-                    <div className="Icons">
-                        <img src={Menu.Search} alt=""/>
-                        <img src={Menu.Bell} alt=""/>
-                        <img src={Menu.Logout} alt=""/>
+                <div className="right">
+                    <div className="search">
+                        <input type="text" placeholder="Search..."/>
+                    </div>
+                    <div className="icons">
+                        <img src={Icons.Menu.Bell} alt="bell"/>
+                    </div>
+                    <div className="icons">
+                        <img src={Icons.Menu.Logout} alt="logout"/>
                     </div>
                 </div>
             </div>
@@ -34,4 +39,4 @@ class TopMenu extends Component {
     }
 }
  
-export default TopMenu
+export default Menu

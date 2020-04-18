@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-
+import '../css/Aside.scss'
 // icons
-const { Aside } = require('../dry/Image')
+const { Icons } = require('../dry/Image')
 
 export default class Asides extends Component {
     constructor(props) {
@@ -11,21 +11,33 @@ export default class Asides extends Component {
          }
     }
     render() { 
-        return (    
-            <div className="Asides">
-                <div className="Icons Top">
-                    <img src={Aside.Apps} alt="Apps"/>
-                    <img src={Aside.Chart} alt="Apps"/>
-                    <img src={Aside.News} alt="Apps"/>
-                    <img src={Aside.Calculator} alt="Apps"/>
+        return (
+            <div className="Aside">
+                <div className="top">
+                    <div className="icons">
+                        <img src={Icons.Aside.Apps} alt="app"/>
+                    </div>
+                    <div className="icons">
+                        <img src={Icons.Aside.Chart} alt="chart"/>
+                    </div>
+                    <div className="icons">
+                        <img src={Icons.Aside.News} alt="news"/>
+                    </div>
+                    <div className="icons">
+                        <img src={Icons.Aside.Calculator} alt="claculator"/>
+                    </div>
                 </div>
-                <div className="Icons Bottom">
-                    <img src={Aside.User} alt="Apps"/>
+                <div className="bottom">
+                    <div className="icons">
+                        <img src={Icons.Aside.User} alt="user"/>
+                    </div>
                 </div>
-            </div>
+            </div>    
         )
     }
 }
  
 
 
+
+           

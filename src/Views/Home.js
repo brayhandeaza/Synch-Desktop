@@ -5,7 +5,7 @@ import '../css/Home.scss'
 import Aside from '../components/Aside'
 import Charts from '../components/Charts'
 
-
+import {connect} from 'react-redux';
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +13,11 @@ class Home extends Component {
 
          }
     }
-     
+
+    componentDidMount() {
+        this.props.dispatch({type: "isCharts"})
+    }
+    
     render() { 
         return ( 
             <div className="Home">
@@ -23,5 +27,8 @@ class Home extends Component {
         )
     }
 }
- 
-export default Home
+
+function mapStateToProps(state) {
+    return {state}
+  }
+export default connect(mapStateToProps)(Home)

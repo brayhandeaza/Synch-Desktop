@@ -1,18 +1,37 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './css/App.scss'
+import { Switch, Route } from 'react-router-dom';
+
+import {connect} from 'react-redux';
+
 
 // Components
 import Home from './views/Home'
+import Aside from './components/Aside'
 import Menu from './components/Menu'
 
-
-function App() {
-  return (
-    <div className="App">
-      <Menu/>
-      <Home/>
-    </div>
-  )
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      
+    }
+  }
+  render(){
+    return (
+      <div className="App" >
+        <Menu/>
+        <Switch>
+            <Route exact  path='/' component={Aside}/>
+            <Route exact  path='/charts' component={Home}/>
+            <Route exact  path='/news' component={Home}/>
+            <Route exact  path='/calculator' component={Home}/>
+        </Switch>
+      </div>
+    )
+  }
 }
-
-export default App
+function mapStateToProps(state) {
+  return {state}
+}
+export default connect(mapStateToProps)(App)

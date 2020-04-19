@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../css/Menu.scss'
+import {connect} from 'react-redux';
 const { Icons } = require('../constants/Image')
 
 
@@ -10,6 +11,7 @@ class Menu extends Component {
 
          }
     }
+   
     render() { 
         return ( 
             <div className="Header">
@@ -18,7 +20,7 @@ class Menu extends Component {
                         <img src={Icons.Menu.Logo} alt="logo"/>
                     </div>
                     <div className="titles-container">
-                        <span>Stocks</span>
+                        <span>{this.props.state.window}</span>
                         <span>-</span>
                         <span>Twitter</span>
                     </div>
@@ -40,4 +42,7 @@ class Menu extends Component {
     }
 }
  
-export default Menu
+function mapStateToProps(state) {
+    return { state }
+  }
+export default connect(mapStateToProps)(Menu)

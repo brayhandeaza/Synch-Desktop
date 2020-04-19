@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import '../css/Home.scss'
 
 // Components
-import Aside from '../Componets/Aside'
+import Aside from '../components/Aside'
+import Charts from '../components/Charts'
+
 
 class Home extends Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class Home extends Component {
         return ( 
             <div className="Home">
                 <Aside/>
+                <Charts/>
             </div>
         )
     }

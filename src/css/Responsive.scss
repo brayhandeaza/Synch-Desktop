@@ -22,15 +22,18 @@
     .main .left .top img, .main .left .bottom img{
         width: 20px;
     }
+    .Charts {
+        width: 800px;
+    }
+
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 820px) {
     .Header {
         .left {
             width: auto;
             .titles-container {
                 padding: 0;
-                background: rgba(0, 0, 0, 0.322);
                 span {
                     display: none;
                 }
@@ -78,11 +81,17 @@
 
             .icons {
                 width: 50px;
+                display: none;
             }
             :hover {
                 background: transparent;
             }
         }
     }
-
+    .Home {
+        display: block;
+    }
+    .Charts {
+        width: 100vw;
+    }
 }

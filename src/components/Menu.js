@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/Menu.scss'
-const { Icons } = require('../dry/Image')
+const { Icons } = require('../constants/Image')
 
 
 class Menu extends Component {
@@ -26,6 +26,7 @@ class Menu extends Component {
                 <div className="right">
                     <div className="search">
                         <input type="text" placeholder="Search..."/>
+                        <img src={Icons.Menu.Search} alt="bell"/>
                     </div>
                     <div className="icons">
                         <img src={Icons.Menu.Bell} alt="bell"/>

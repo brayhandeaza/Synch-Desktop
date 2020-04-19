@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../css/Aside.scss'
 // icons
-const { Icons } = require('../dry/Image')
+const { Icons } = require('../constants/Image')
 
 export default class Asides extends Component {
     constructor(props) {

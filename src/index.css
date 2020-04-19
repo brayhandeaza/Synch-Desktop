@@ -1,11 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|Changa&display=swap');
-
-
-body {
+*{
   margin: 0;
-  font-family: sans-serif;
-  font-family: 'Quicksand', sans-serif;
-}
+  padding: 0;
+ }
 
 #root {
   width: 100%;

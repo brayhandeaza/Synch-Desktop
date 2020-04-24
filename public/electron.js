@@ -24,7 +24,6 @@ const Template = [
       { role: 'quit' }
     ]
   }] : []),
-  // { role: 'editMenu' }
   {
     label: 'Edit',
     submenu: [

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../css/Home.scss'
 
 // Components
+import Menu from '../components/Menu'
 import Aside from '../components/Aside'
 import Charts from '../components/Charts'
 
@@ -10,19 +11,26 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-
+            cHeight: 0
          }
-    }
 
+    }
+   
     componentDidMount() {
+        // const menu = document.querySelector('.Menus').style.height
+        // console.log(menu);
+        
         this.props.dispatch({type: "isCharts"})
     }
     
     render() { 
         return ( 
             <div className="Home">
-                <Aside/>
-                <Charts/>
+                <div className="Menus">
+                    <Menu/>
+                    <Aside/>
+                </div>
+                <Charts canvasHeight={"this.canvasHeight()"}/>
             </div>
         )
     }

@@ -4,7 +4,7 @@ const isDev = require('electron-is-dev')
 const isMac = process.platform === 'darwin'
 let win
 app.whenReady().then(() => {
-    win = new BrowserWindow({minWidth: 900, width: 900, minHeight: 600, height: 600});
+    win = new BrowserWindow({width: 900, minWidth: 900, maxWidth: 900, height: 600, minHeight: 600, maxHeight: 600});
     win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`)
    
 })

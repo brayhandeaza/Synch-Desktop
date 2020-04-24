@@ -50,9 +50,7 @@ class Asides extends Component {
                     </Link>
                 </div>
                 <div className="bottom">
-                    <div className="icons">
-                        <img src={Icons.Aside.User} alt="user"/>
-                    </div>
+                    <h4>$28.27</h4>
                 </div>
             </div>    
         )

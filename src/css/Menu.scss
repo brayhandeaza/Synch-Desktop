@@ -3,10 +3,11 @@
     height: 80px;
     
     display: flex;
-    align-items: center;
+    align-items: center !important;
+    justify-content: space-between;
 
     .left {
-       width: 50%;
+       width: 50% !important;
        height: 100%;
    
        display: flex;

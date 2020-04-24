@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import {Line} from 'react-chartjs-2'
+import {Line, defaults} from 'react-chartjs-2'
+import Chart from 'chart.js'
 import '../css/Charts.scss'
 import axios from 'axios'
 import {connect} from 'react-redux';
-const FinnURL = "https://finnhub.io/api/v1/quote?symbol=FB&token=bp6k727rh5rbd0i31l50"
-const AlphaURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=FB&apikey=OYCO9ZZ10MYM6E0R"
+import { labels } from "../constants/Charts/Labels";
+
+// const AlphaURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
+const AlphaURL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo"
 
 class Charts extends Component {
     constructor(props) {
@@ -13,101 +16,115 @@ class Charts extends Component {
         this.state = {
             data: [],
             index: [0],
-            option: {}
+            option: {},
+            conanyName: "",
+            cavasSize: 0
         }
-        
-    }
-    FetchFinn =  async () => {
-        let data = [], index = [], i = 0
-        await axios.get(FinnURL).then((res)=> {
-            data.push(res.data)
-            index.push(i++)
-        })
-        this.setState({
-            data,
-            index 
-        })
-    }
-    FetchAlpha = async () => {
-        let data = [], index = [], i = 0
-        await axios.get(FinnURL).then((res) => {
-            // let object = res.data['Time Series (Daily)']
-            setInterval( async () => {
-                let random = (Math.random() * 10).toFixed(3).toString()
-           
-                data.push(eval(`${res.data.c} + ${random}`))
-                index.push(i++)
-            }, 1000)
-        })
-        return {
-            data,
-            index
-        }
-    }
-    ChartData = (data, index, stock = "Twitter") => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext("2d");
-        const gradient = ctx.createLinearGradient(0, 0, 0, 200);
-        for (let i = 0; i < 1; i++) {
-            index.push([data.length + i])
-        }
-        // console.log(this.state.index); 
-        gradient.addColorStop(0.00001, 'red');
-        gradient.addColorStop(0.9,  'rgba(78, 248, 135, 0.001)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.001)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.002)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.004)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.006)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.007)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.008)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.005)');
-        gradient.addColorStop(1,    'rgba(78, 248, 135, 0.005)');
-
-        return {
-          labels: index,
-          datasets: [{
-            label: stock,
-            data: data,
-            backgroundColor: gradient,
-            borderColor: '#de3105',
-            borderWidth: 1
-          }]
-        }
-    }
-
-    ChartOption = () => {
-        let option = {
-            responsive: true,
-            scales: {
-                xAxes: [{
-                    display: false,
-                }],
-                yAxes: [{
-                    display: false,  
-                }]
-            },
-            tooltip: {
-                mode: 'label'
-            }
-        }
-        return option
     }
     
-    componentDidMount() {
-        this.FetchAlpha().then((res) => {
-            setInterval(() => {
-                this.setState({
-                    data: this.ChartData(res.data, res.index),
-                    option: this.ChartOption()
-                })
-                console.log(this.state);
-            },3000)
-        })        
+    FetchAlpha =  async () => {
+        const index = labels
+        const data = []
+        
+        await axios.get(AlphaURL).then( async (res)=> {
+            let object = res.data["Time Series (5min)"]
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    data.push(object[key]['1. open'])
+                }
+            }
+        })
+        
+        let last = data.slice(0,85)
+        return {
+            colors: this.handleChartColor(Math.min(...last),parseFloat(last.slice(-1)[0])),
+            data: last,
+            index
+        }
+    }    
+    handleChartColor = (min,last) => {
+     if (last > min || last !== min) {
+        return true
+
+        } else {
+        console.log(min, last);
+        return false
+     }
     }
+
+    UpdateChart = () => {
+        let i = 0;
+        this.FetchAlpha().then((res) => {
+            this.handleChart(res.data.slice(0), res.index, res.colors)
+                // console.log(res.data);  
+        })
+    }
+
+    handleChart = (data, index, colors) => {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+        const header =  document.querySelector('.Menus')
+        
+        gradient.addColorStop(0.1,  colors ? 'rgba(78, 248, 135, 0.3)' : 'rgba(211, 120, 120, 0.5)');
+        gradient.addColorStop(1,   colors ? 'rgba(78, 248, 135, 0)' : 'rgba(211, 120, 120, 0)');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: index,
+                datasets: [{
+                    data: data,
+                    backgroundColor: gradient,
+                    borderColor: colors ? 'green' : 'red',
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{ 
+                        ticks: {
+                            fontSize: 10,
+                        },                   
+                        gridLines: {
+                            display: false
+                        },
+                        position: 'right',
+                    }],
+                    xAxes: [{
+                        // position: "top",
+                        ticks: {
+                            padding: 30,
+                            autoSkip: false,
+                            maxRotation: 0,
+                            minRotation: 0,
+                            fontSize: 10,
+                            callback: (dta, idx) => {
+                                return idx % 6 == 0 && idx !== 0 && idx !== 84 ? dta : ''
+                            }
+                        },
+                        gridLines: {
+                            display: false, 
+                        }
+                    }]
+                }
+            }
+        })
+    }
+
+
+    componentDidMount() {  
+        this.UpdateChart()   
+        this.handleChart()
+    }
+
     render() { 
         return ( 
             <div className="Charts">
-                <Line data={this.state.data} options={this.state.option}/>
+                <canvas id="canvas" width={window.innerWidth - 10}></canvas>
             </div>
         )
     }

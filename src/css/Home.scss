@@ -1,6 +1,16 @@
 .Home {
     width: 100vw;
-    height: 450px;
+    height: 100vh;
+
+    .Menus {
+        width: 100%;
+        height: auto;
+        
+        display: flex;
+        flex-direction: row;
+        flex-flow: wrap;
+
+    }
 }
 
 

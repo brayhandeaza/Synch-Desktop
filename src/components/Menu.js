@@ -22,7 +22,7 @@ class Menu extends Component {
                     <div className="titles-container">
                         <span>{this.props.state.window}</span>
                         <span>-</span>
-                        <span>Twitter</span>
+                        <span>IBM</span>
                     </div>
                 </div>
                 <div className="right">
@@ -32,6 +32,9 @@ class Menu extends Component {
                     </div>
                     <div className="icons">
                         <img src={Icons.Menu.Bell} alt="bell"/>
+                    </div>
+                    <div className="icons">
+                        <img src={Icons.Aside.User} alt="user"/>
                     </div>
                     <div className="icons">
                         <img src={Icons.Menu.Logout} alt="logout"/>

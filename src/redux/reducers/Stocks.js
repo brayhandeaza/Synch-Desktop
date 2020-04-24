@@ -1,9 +1,8 @@
-
 let inicialState = {
     isStocks: false,
     isCharts: false,
     isNews: false,
-    isCalculator: false
+    isCalculator: false,
 }
 
 module.exports = (state = inicialState, actions) => {
